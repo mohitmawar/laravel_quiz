@@ -15,7 +15,16 @@ class CreateQuizQuestionsTable extends Migration
     {
         Schema::create('quiz_questions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('quiz_id');
+            $table->integer('counter');
+            $table->text('question')->nullable();
+            $table->json('options')->nullable();
+            $table->json('answers')->nullable();
             $table->timestamps();
+            $table->tinyInteger('status')->default('1');
+
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->constrained();
+
         });
     }
 
@@ -26,6 +35,9 @@ class CreateQuizQuestionsTable extends Migration
      */
     public function down()
     {
+        Schema::table('quiz_questions', function (Blueprint $table) {
+            $table->dropForeign(['quiz_id']);
+        });
         Schema::dropIfExists('quiz_questions');
     }
 }

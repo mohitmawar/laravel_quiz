@@ -67,8 +67,8 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    @if (Auth::guard('provider')->user())
-                    <a href="{{ route('provider-dashboard') }}">User Dashboard</a>
+                    @if (Auth::user())
+                    <a href="{{ route('user-dashboard') }}">User Dashboard</a>
                     @else
                     <a href="{{ route('login') }}">Login</a>
                     @endif

@@ -13,9 +13,20 @@ class CreateQuizResultTable extends Migration
      */
     public function up()
     {
-        Schema::create('quiz_result', function (Blueprint $table) {
+        Schema::create('quiz_results', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('quiz_id');
+            $table->unsignedBigInteger('user_id');
+            $table->integer("total_attempt")->default(0);
+            $table->integer("total_right")->default(0);
+            $table->integer("total_wrong")->default(0);
+            $table->boolean('is_pass')->default(false);
             $table->timestamps();
+            $table->tinyInteger('status')->default('1');
+
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->constrained();
+            $table->foreign('user_id')->references('id')->on('users')->constrained();
+
         });
     }
 
@@ -26,6 +37,10 @@ class CreateQuizResultTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quiz_result');
+        Schema::table('quiz_results', function (Blueprint $table) {
+            $table->dropForeign(['quiz_id']);
+            $table->dropForeign(['user_id']);
+        });
+        Schema::dropIfExists('quiz_results');
     }
 }

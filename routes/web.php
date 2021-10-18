@@ -36,8 +36,13 @@ Route::group(['middleware' => ['web', 'admin.auth:admin'], 'prefix' => 'admin'],
 
 
 /************************              User panel request              ************************/
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'user' ,'namespace' => 'user'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'user', 'namespace' => 'user'], function () {
     Route::get('dashboard', 'QuizController@index')->name('user-dashboard');
     Route::get('start-quiz/{quiz}', 'QuizController@start')->name('start.quiz');
     Route::post('quiz-submit/{quiz_result}', 'QuizController@submit')->name('start.submit');
+});
+
+/* test live wire */
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'user', 'namespace' => 'livewire'], function () {
+    Route::get('livewire-dashboard', 'LiveWireController@index')->name('user-dashboard-livewire');
 });

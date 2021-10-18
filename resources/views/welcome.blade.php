@@ -72,12 +72,6 @@
                     @else
                     <a href="{{ route('login') }}">Login</a>
                     @endif
-
-                    @if (Auth::guard('admin')->user())
-                    <a href="{{ route('admin-dashboard') }}">Admin Dashboard</a>
-                    @else
-                    <a href="{{ route('adminLoginForm') }}">Admin Login</a>
-                    @endif
                 </div>
             @endif
 

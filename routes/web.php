@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+
 /************************              admin panel request              ************************/
 Route::get('admin/', 'Auth\AdminLoginController@showLoginForm')->name('adminLoginForm');
 Route::post('admin/login', 'Auth\AdminLoginController@login')->name('adminLogin');
